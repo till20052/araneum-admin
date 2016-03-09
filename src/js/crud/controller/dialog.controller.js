@@ -58,17 +58,17 @@
          */
         function activate() {
             if (
-                !$scope.hasOwnProperty('ngDialogData') || !($scope.ngDialogData instanceof Object)
+                !$scope.$parent.hasOwnProperty('ngDialogData') || !($scope.$parent.ngDialogData instanceof Object)
             )
                 throw console.error('[ERROR]: Controller cannot access required initialisation data.');
 
-            var $data = $scope.ngDialogData;
+            var $data = $scope.$parent.ngDialogData;
 
             ['icon', 'title']
                 .forEach(function (key) {
                     if (!$data.hasOwnProperty(key))
                         return;
-                    vm[key] = $scope.ngDialogData[key];
+                    vm[key] = $data[key];
                 });
 
             if ($data.hasOwnProperty('datatable'))
