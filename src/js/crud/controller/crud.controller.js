@@ -124,8 +124,6 @@
             function create(data) {
                 Dialog.open({
                     template: 'crud/dialog.html',
-                    controller: 'CRUDDialogController',
-                    controllerAs: 'vm',
                     data: {
                         icon: data.view.icon,
                         title: data.view.label,
@@ -177,8 +175,6 @@
             function update(data) {
                 Dialog.open({
                     template: 'crud/dialog.html',
-                    controller: 'CRUDDialogController',
-                    controllerAs: 'vm',
                     data: {
                         icon: data.view.icon,
                         title: data.view.label,
