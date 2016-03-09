@@ -1,0 +1,22 @@
+{
+  "name": "crud",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/crud.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/till20052/crud.git"
+  },
+  "author": "Artem Morozov <artemm@migfin.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/till20052/crud/issues"
+  },
+  "homepage": "https://github.com/till20052/crud#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-if": "latest",
+    "gulp-uglify": "^1.5.3"
+  }
+}

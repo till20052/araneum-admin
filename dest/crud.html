@@ -1,0 +1,67 @@
+<div ng-controller="CRUDController as vm">
+    <h3>
+        <em class="{{ icon }} mr"></em>
+        <span translate="{{ title }}"></span>
+    </h3>
+
+    <div id="filter" class="panel panel-default">
+        <div class="panel-heading">
+            <paneltool tool-collapse="tool-collapse" tool-refresh="traditional"></paneltool>
+            <h3 class="panel-title">
+                <em class="fa fa-filter mr-sm"></em>
+                {{ 'admin.general.FILTERS' | translate }}
+            </h3>
+        </div>
+        <div uib-collapse="filter" class="panel-wrapper">
+            <div class="panel-body">
+                <form manifest="vm.filter"></form>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading pb0">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3 class="panel-title mt">
+                        <em class="icon-layers mr-sm"></em>
+                        {{ 'admin.general.DATA_LIST' | translate }}
+                    </h3>
+                </div>
+                <div class="col-xs-6">
+                    <toolbar manifest="vm.toolbar"></toolbar>
+                </div>
+            </div>
+            <hr class="mt mb0"/>
+        </div>
+        <div class="panel-body">
+            <crud-datatable manifest="vm.datatable"></crud-datatable>
+        </div>
+    </div>
+
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}"></toaster-container>
+
+    <script type="text/ng-template" id="crud/dialog.html">
+
+        <div class="whirl traditional" ng-hide="vm.isLoaded">
+            <div>
+                <div>{{ 'admin.general.LOADING' | translate }}</div>
+            </div>
+        </div>
+
+        <div ng-show="vm.isLoaded">
+
+            <h3 class="mt0 mb-lg">
+                <em class="{{ vm.icon }} mr"></em>{{ vm.title | translate }}
+            </h3>
+
+            <div ng-show="vm.errors.length > 0" class="alert alert-danger">
+                <div ng-repeat="error in vm.errors track by $index">{{ error }}</div>
+            </div>
+
+            <form manifest="vm.form"></form>
+
+        </div>
+
+    </script>
+</div>
