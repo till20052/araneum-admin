@@ -39,6 +39,12 @@
         function thead(columns) {
             return $('<thead />').append(
                 $('<tr />').append(
+                    $('<th class="bt0 bl0 p text-center" />')
+                        .attr({
+                            width: 1,
+                            'data-sortable': false
+                        })
+                        .append($('<checkbox />')),
                     $.map(columns, function (column) {
                         return $('<th class="bt0 bl0" />')
                             .html('{{ "' + column + '" | translate }}');
@@ -47,13 +53,7 @@
                         .attr({
                             width: 1,
                             'data-sortable': false
-                        }),
-                    $('<th class="bt0 bl0 p text-center" />')
-                        .attr({
-                            width: 1,
-                            'data-sortable': false
                         })
-                        .append($('<checkbox />'))
                 )
             );
         }

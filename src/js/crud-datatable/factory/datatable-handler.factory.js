@@ -110,7 +110,8 @@
                         success: function (data) {
                             callback(angular.extend(data, {
                                 aaData: $.map(data.aaData, function (cols) {
-                                    return [cols.splice(0, cols.length - 1).concat(['<dropdown />', '<checkbox />'])];
+                                    return ['<checkbox />'].concat(cols.splice(0, cols.length - 1).concat(['<dropdown />']));
+                                    //return [cols.splice(0, cols.length - 1).concat(['<dropdown />', '<checkbox />'])];
                                 })
                             }));
                             $('input[type="checkbox"]', settings.nTable).prop('checked', false);
