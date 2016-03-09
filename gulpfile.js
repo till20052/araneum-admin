@@ -27,7 +27,7 @@ gulp.task('build:js', function () {
             });
         })(crud.mask, crud.path))
         .pipe(gulpConcat([crud.name, 'min', 'js'].join('.')))
-        .pipe(gulpUglify())
+        //.pipe(gulpUglify())
         .pipe(gulp.dest(paths.dest))
 });
 
