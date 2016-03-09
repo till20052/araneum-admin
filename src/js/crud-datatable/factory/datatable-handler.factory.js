@@ -110,7 +110,7 @@
                         data: data,
                         success: function (data) {
                             callback(angular.extend(data, {
-                                aaData: $.map(data.aaData, function (row) {
+                                aaData: $.map(data.aaData, function (data) {
                                     var row = {DT_RowId: data[0]};
                                     return ['<checkbox />'].concat(data.splice(0, data.length - 1).concat(['<dropdown />']))
                                             .forEach(function (value, i) {
