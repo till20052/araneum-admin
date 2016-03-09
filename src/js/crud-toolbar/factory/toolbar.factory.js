@@ -30,6 +30,7 @@
             return $('<div />')
                 .append(
                     Object.keys(handler.buttons)
+                        .reverse()
                         .map(function (key) {
                             return group(handler.buttons[key]);
                         })
