@@ -56,6 +56,7 @@
                 }
 
                 $this.options = DTOptionsBuilder.newOptions()
+                    .withOption('order', [[1, 'asc']])
                     .withOption('processing', true)
                     .withOption('serverSide', true)
                     .withOption('fnServerData', fnServerData)
@@ -110,7 +111,11 @@
                         success: function (data) {
                             callback(angular.extend(data, {
                                 aaData: $.map(data.aaData, function (row) {
-                                    return ['<checkbox />'].concat(row.splice(0, row.length - 1).concat(['<dropdown />']));
+                                    var row = {DT_RowId: data[0]};
+                                    return ['<checkbox />'].concat(data.splice(0, data.length - 1).concat(['<dropdown />']))
+                                            .forEach(function (value, i) {
+                                                this[i] = value
+                                            }, row) || row;
                                 })
                             }));
                             $('input[type="checkbox"]', settings.nTable).prop('checked', false);
@@ -118,7 +123,7 @@
                                 $('> tbody > tr', settings.nTable)
                                     .each(function () {
                                         $(this).data('$$', {
-                                            id: parseInt($('> td:first-child', this).text()),
+                                            id: parseInt($(this).attr('id')),
                                             selected: false
                                         });
                                     })
