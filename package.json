@@ -1,22 +1,22 @@
 {
-  "name": "crud",
+  "name": "zzCrud",
   "version": "0.0.1",
   "description": "",
   "main": "dist/crud.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/till20052/crud.git"
+    "url": "ssh://git@stash.office.dev:7999/af/crud.git"
   },
   "author": "Artem Morozov <artemm@migfin.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/till20052/crud/issues"
-  },
-  "homepage": "https://github.com/till20052/crud#readme",
+  "homepage": "http://stash.office.dev/projects/AF/repos/crud/browse",
   "devDependencies": {
+    "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-if": "latest",
-    "gulp-uglify": "^1.5.3"
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "gulp-watch": "^4.3.5"
   }
 }

@@ -2,12 +2,19 @@
     'use strict';
 
     angular
-        .module('crud.toolbar')
-        .directive('toolbar', toolbar);
+        .module('crud.datatable')
+        .directive('zzDatatable', CRUDDataTableDirective);
 
-    toolbar.$inject = ['ToolBarHandler', '$compile'];
+    CRUDDataTableDirective.$inject = ['DTHandler', 'DTOptionsBuilder', '$compile', '$state'];
 
-    function toolbar(ToolBarHandler, $compile) {
+    /**
+     * CRUD DataTable Directive
+     *
+     * @returns {Object}
+     * @constructor
+     */
+    function CRUDDataTableDirective(DTHandler, DTOptionsBuilder, $compile, $state) {
+
         return {
             link: link,
             restrict: 'E',
@@ -17,10 +24,7 @@
         };
 
         /**
-         * link
-         *
-         * @param scope
-         * @param element
+         * directive link
          */
         function link(scope, element) {
             if (!(scope.manifest instanceof Object))
@@ -32,11 +36,15 @@
              * Activation
              */
             function activate() {
-                scope.toolbar = new ToolBarHandler(defineEvents(scope.manifest, [{afterBuild: compile}]));
+                scope.dt = new DTHandler(defineEvents(scope.manifest, [{afterBuild: compile}]), {
+                    compile: function (element) {
+                        $compile(element)(scope);
+                    }
+                });
             }
 
             /**
-             * Define ToolBar Events
+             * Define DataTable Events
              *
              * @param {Object} manifest
              * @param {Array} events
@@ -61,13 +69,13 @@
             }
 
             /**
-             * Compile ToolBar
+             * Compile DataTable
              *
-             * @param {jQuery} toolbar
+             * @param {jQuery} datatable
              * @private
              */
-            function compile(toolbar) {
-                element.replaceWith($compile(toolbar)(scope));
+            function compile(datatable) {
+                element.replaceWith($compile(datatable)(scope));
             }
         }
     }

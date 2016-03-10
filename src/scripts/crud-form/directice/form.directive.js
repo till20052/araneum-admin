@@ -3,7 +3,7 @@
 
     angular
         .module('crud.form')
-        .directive('form', directive);
+        .directive('zzForm', directive);
 
     directive.$inject = ['FormHandler', '$compile'];
 

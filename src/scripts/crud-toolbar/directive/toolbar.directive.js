@@ -2,19 +2,12 @@
     'use strict';
 
     angular
-        .module('crud.datatable')
-        .directive('crudDatatable', CRUDDataTableDirective);
+        .module('crud.toolbar')
+        .directive('zzToolbar', toolbar);
 
-    CRUDDataTableDirective.$inject = ['DTHandler', 'DTOptionsBuilder', '$compile', '$state'];
+    toolbar.$inject = ['ToolBarHandler', '$compile'];
 
-    /**
-     * CRUD DataTable Directive
-     *
-     * @returns {Object}
-     * @constructor
-     */
-    function CRUDDataTableDirective(DTHandler, DTOptionsBuilder, $compile, $state) {
-
+    function toolbar(ToolBarHandler, $compile) {
         return {
             link: link,
             restrict: 'E',
@@ -24,7 +17,10 @@
         };
 
         /**
-         * directive link
+         * link
+         *
+         * @param scope
+         * @param element
          */
         function link(scope, element) {
             if (!(scope.manifest instanceof Object))
@@ -36,15 +32,11 @@
              * Activation
              */
             function activate() {
-                scope.dt = new DTHandler(defineEvents(scope.manifest, [{afterBuild: compile}]), {
-                    compile: function (element) {
-                        $compile(element)(scope);
-                    }
-                });
+                scope.toolbar = new ToolBarHandler(defineEvents(scope.manifest, [{afterBuild: compile}]));
             }
 
             /**
-             * Define DataTable Events
+             * Define ToolBar Events
              *
              * @param {Object} manifest
              * @param {Array} events
@@ -69,13 +61,13 @@
             }
 
             /**
-             * Compile DataTable
+             * Compile ToolBar
              *
-             * @param {jQuery} datatable
+             * @param {jQuery} toolbar
              * @private
              */
-            function compile(datatable) {
-                element.replaceWith($compile(datatable)(scope));
+            function compile(toolbar) {
+                element.replaceWith($compile(toolbar)(scope));
             }
         }
     }
