@@ -1,7 +1,7 @@
 {
 
   "scripts": {
-    "source": {
+    "src": {
       "path": "src/scripts",
       "filter": [
         "*.module.js",
@@ -10,18 +10,18 @@
         "**/*.*.js"
       ]
     },
-    "build": {
+    "dist": {
       "path": "dist/js",
       "name": "crud.js"
     }
   },
 
   "views": {
-    "source": {
+    "src": {
       "path": "src/views",
       "filter": "**/*.html"
     },
-    "build": {
+    "dist": {
       "path": "dist/views"
     }
   }
