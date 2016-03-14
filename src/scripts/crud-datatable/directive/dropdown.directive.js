@@ -38,7 +38,7 @@
                     onSuccess: function (data) {
                         $(element)
                             .parent()
-                            .addClass('text-center');
+                            .addClass('text-center actions-column');
                         element.replaceWith($compile(createDropdown(data.action.row))(scope));
                     }
                 });
@@ -52,7 +52,10 @@
          */
         function createDropdown(list) {
             return $('<div class="btn-group" />')
-                .attr('uib-dropdown', '')
+                .attr({
+                    'uib-dropdown': '',
+                    'dropdown-append-to-body': true
+                })
                 .append(
                     $('<button class="btn btn-xs btn-default dropdown-toggle" />')
                         .attr({

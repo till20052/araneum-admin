@@ -82,6 +82,11 @@
                  * @private
                  */
                 function fnServerData(source, data, callback, settings) {
+                    if($('div.dataTables_ofpanel').length !== 1){
+                        $('<div class="dataTables_ofpanel" />').insertAfter(settings.nTable)
+                            .append(settings.nTable);
+                    }
+
                     if ($this.instance.hasOwnProperty('drawAttrs')) {
                         var attrs = $this.instance.drawAttrs;
 
