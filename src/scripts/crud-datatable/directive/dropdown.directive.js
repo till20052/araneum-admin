@@ -38,8 +38,8 @@
                     onSuccess: function (data) {
                         $(element)
                             .parent()
-                            .addClass('text-center actions-column');
-                        element.replaceWith($compile(createDropdown(data.action.row))(scope));
+                            .addClass('text-center actions')
+                            .html($compile(createDropdown(data.action.row))(scope));
                     }
                 });
         }

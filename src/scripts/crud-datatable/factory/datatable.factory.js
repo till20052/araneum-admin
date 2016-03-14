@@ -49,11 +49,12 @@
                         return $('<th class="bt0 bl0" />')
                             .html('{{ "' + column + '" | translate }}');
                     }),
-                    $('<th class="bt0 bl0" />')
+                    $('<th class="actions" />')
                         .attr({
                             width: 1,
                             'data-sortable': false
                         })
+                        .append($('<div />'))
                 )
             );
         }

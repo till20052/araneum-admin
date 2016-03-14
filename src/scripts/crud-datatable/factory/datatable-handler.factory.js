@@ -82,10 +82,37 @@
                  * @private
                  */
                 function fnServerData(source, data, callback, settings) {
-                    if($('div.dataTables_ofpanel').length !== 1){
-                        $('<div class="dataTables_ofpanel" />').insertAfter(settings.nTable)
-                            .append(settings.nTable);
-                    }
+
+                    (function (s) {
+                        if ($('div.dataTables_ovCase', s.nTable).length > 0)
+                            return;
+
+                        var table = $(s.nTable),
+                            div = $('<div class="dataTables_ovCase" />');
+
+                        div.insertAfter(table)
+                            .append(table)
+                            .scroll(function () {
+                                $('> tr > td.actions', s.nTBody).css({
+                                    marginRight: (0 - $(this).scrollLeft()) + 'px'
+                                });
+                            });
+
+                        $(window).resize(function () {
+                            console.log($(div).width(), $(table).width(), div.scrollLeft());
+
+                            if(table.width() - div.width() <= div.scrollLeft() - 1){
+                                div.scrollLeft(table.width() - div.width());
+                            }
+
+                            $('> tr > td.actions', s.nTBody).each(function () {
+                                $(this).css({
+                                    padding: (($(this).parent().height() - $('> div', this).height()) / 2 - 1) + 'px 10px'
+                                });
+                            })
+                        });
+
+                    })(settings);
 
                     if ($this.instance.hasOwnProperty('drawAttrs')) {
                         var attrs = $this.instance.drawAttrs;
@@ -138,6 +165,7 @@
                                     })
                             );
                             $this.event('onRenderRows').invoke($this);
+                            $(window).resize();
                         },
                         error: function (response) {
                             if (response.status !== 401)
