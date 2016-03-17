@@ -51,9 +51,13 @@
          * @returns {*|jQuery}
          */
         function createDropdown(list) {
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0;
+                return (c == 'x' ? r : (r&0x3|0x8)).toString(16);
+            });
             return $('<div class="btn-group" />')
                 .attr({
-                    'uib-dropdown': '',
+                    'uib-dropdown': uuid,
                     'dropdown-append-to-body': true
                 })
                 .append(
@@ -63,7 +67,7 @@
                             'uib-dropdown-toggle': ''
                         })
                         .append($('<em class="icon-settings" />')),
-                    createDropdownMenu(list)
+                    createDropdownMenu(uuid, list)
                 );
         }
 
@@ -73,10 +77,11 @@
          * @param list
          * @returns {*|jQuery}
          */
-        function createDropdownMenu(list) {
+        function createDropdownMenu(uuid, list) {
             var groups = Object.keys(list);
             return $('<ul class="dropdown-menu-right" />')
                 .attr({
+                    uuid: uuid,
                     role: 'menu',
                     'uib-dropdown-menu': ''
                 })
@@ -92,9 +97,11 @@
                                 $('<a href="javascript:void(0);" />')
                                     .data('$$', transformer('symfony').transform(options))
                                     .click(function () {
-                                        var dt = angular.element(this).scope().dt,
+                                        var uuid = $(this).parents('ul[uib-dropdown-menu]').attr('uuid'),
+                                            dd = $('div[uib-dropdown="' + uuid + '"]'),
+                                            dt = angular.element(dd).scope().dt,
                                             $$ = angular.extend(
-                                                {row: $(this).parents('tr').data('$$')},
+                                                {row: $(dd).parents('tr').data('$$')},
                                                 $(this).data('$$')
                                             );
                                         dt.event($$.name).invoke(dt, $$);

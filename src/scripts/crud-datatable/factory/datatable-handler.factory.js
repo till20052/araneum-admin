@@ -99,7 +99,7 @@
                             });
 
                         $(window).resize(function () {
-                            console.log($(div).width(), $(table).width(), div.scrollLeft());
+                            // console.log($(div).width(), $(table).width(), div.scrollLeft());
 
                             if(table.width() - div.width() <= div.scrollLeft() - 1){
                                 div.scrollLeft(table.width() - div.width());

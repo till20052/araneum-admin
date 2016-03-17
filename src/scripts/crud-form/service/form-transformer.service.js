@@ -219,7 +219,8 @@
                             }, arguments);
                         return self;
                     }).apply({
-                        id: data.name.split(/(?=[A-Z])/).join('_').toLowerCase(),
+                        // id: data.name.split(/(?=[A-Z])/).join('_').toLowerCase(),
+                        id: data.name,
                         type: $helper.type(data.block_prefixes[1]),
                         name: data.name
                     }, [
