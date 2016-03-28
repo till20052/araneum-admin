@@ -86,6 +86,19 @@
 
                     return Object.keys(data)
                             .forEach(function (key) {
+                                key = (function (key, value) {
+                                    var field = key.replace(/_([a-z])/g, function (g) {
+                                            return g[1].toUpperCase();
+                                        });
+
+                                    this[field] = value;
+
+                                    if (key !== field)
+                                        delete this[key];
+
+                                    return field;
+                                }).call(this, key, this[key]);
+
                                 var type = this[key].constructor.name.toLowerCase();
                                 if (!typesMap.hasOwnProperty(type))
                                     return;
@@ -136,7 +149,7 @@
                 function getType(value) {
                     if (value === 'choice')
                         return 'select';
-                    else if(value === 'date')
+                    else if (value === 'date')
                         return 'datePicker';
                     return value;
                 }
